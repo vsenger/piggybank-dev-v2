@@ -1,0 +1,20 @@
+ARG UBI=public.ecr.aws/lambda/java:11
+
+FROM ${UBI} AS build
+RUN yum -y install which
+COPY . /opt/quarkus-src/
+WORKDIR /opt/quarkus-src/
+RUN /opt/quarkus-src/mvnw -B -Dorg.slf4j.simpleLogger.log.org.apache.maven.cli.transfer.Slf4jMavenTransferListener=warn \
+    org.apache.maven.plugins:maven-dependency-plugin:3.1.2:go-offline
+RUN /opt/quarkus-src/mvnw -B -Dorg.slf4j.simpleLogger.log.org.apache.maven.cli.transfer.Slf4jMavenTransferListener=warn \
+    -f /opt/quarkus-src/pom.xml \
+    package
+
+FROM ${UBI} AS runtime
+EXPOSE 8080
+COPY --from=build /opt/quarkus-src/target/pbnk-api-0.0.1.jar /var/task/lib/
+COPY --from=build /opt/quarkus-src/target/pbnk-api-0.0.1-runner.jar /var/task/lib/
+COPY --from=build /opt/quarkus-src/target/lib /var/task/lib/
+RUN find /var/task/lib/ #DEBUG
+# ENTRYPOINT ["java","-jar","/opt/quarkus-app/quarkus-run.jar"]
+CMD ["io.quarkus.amazon.lambda.runtime.QuarkusStreamHandler::handleRequest"]

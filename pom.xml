@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd" xmlns="http://maven.apache.org/POM/4.0.0"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+  <modelVersion>4.0.0</modelVersion>
+  <groupId>piggybank</groupId>
+  <artifactId>piggybank</artifactId>
+  <version>1.0.0-SNAPSHOT</version>
+  <packaging>pom</packaging>
+  <modules>
+    <module>pbnk-api</module>
+    <module>pbnk-cdk</module>
+    <module>pbnk-eb-docker</module>
+    <module>pbnk-eb-ecs</module>
+    <module>pbnk-fargate</module>
+    <module>pbnk-api-lambda</module>
+    <module>pbnk-vaadin</module>
+  </modules>
+  <dependencyManagement>
+    <dependencies>
+      <dependency>
+        <groupId>io.quarkus.platform</groupId>
+        <artifactId>quarkus-bom</artifactId>
+        <version>2.8.3.Final</version>
+        <type>pom</type>
+        <scope>import</scope>
+      </dependency>
+    </dependencies>
+  </dependencyManagement>
+  <dependencies>
+
+  </dependencies>
+  <build>
+    <defaultGoal>clean install</defaultGoal>
+  </build>
+</project>

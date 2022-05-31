@@ -1,0 +1,6 @@
+version: '3.8'
+services:
+  g2048:
+    image: "alexwhen/docker-2048"
+    ports:
+      - "5000:80"
