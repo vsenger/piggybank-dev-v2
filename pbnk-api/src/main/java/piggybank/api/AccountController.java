@@ -16,7 +16,7 @@ public class AccountController {
     @GET
     @Transactional
     public Account getNewAccount(){
-        var tx = new Account("nubank");
+        var tx = new Account("nubank" + password);
         tx.persist();
         return tx;
     }
