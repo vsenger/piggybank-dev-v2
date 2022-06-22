@@ -11,7 +11,7 @@ import java.util.List;
 
 @Path("/account")
 public class AccountController {
-    String password="Ru!R*4tXwS3GsLam/QXYe*34lTz7M5DXA"
+    String password="Ru!R*4tXwS3GsLam/QXYe*34lTz7M5DXA";
     @Path("new")
     @GET
     @Transactional
